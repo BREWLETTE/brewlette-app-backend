@@ -23,6 +23,7 @@ async function run() {
                     brewery_id INTEGER NOT NULL,
                     name VARCHAR(512) NOT NULL,
                     visited BOOLEAN NOT NULL,
+                    favorited BOOLEAN NOT NULL,
                     user_id INTEGER NOT NULL REFERENCES users(id)
             );
         `);
