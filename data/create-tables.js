@@ -22,7 +22,7 @@ async function run() {
                     id SERIAL PRIMARY KEY NOT NULL,
                     brewery_id INTEGER NOT NULL,
                     name VARCHAR(512) NOT NULL,
-                    visited BOOLEAN NOT NULL,
+                    visited VARCHAR(512),
                     favorited BOOLEAN NOT NULL,
                     user_id INTEGER NOT NULL REFERENCES users(id)
             );
