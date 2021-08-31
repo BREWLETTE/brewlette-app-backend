@@ -5,7 +5,6 @@ const { getEmoji } = require('../lib/emoji.js');
 run();
 
 async function run() {
-
   try {
     // initiate connecting to db
     await client.connect();
