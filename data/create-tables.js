@@ -14,7 +14,7 @@ async function run() {
     await client.query(`
                 CREATE TABLE users (
                     id SERIAL PRIMARY KEY,
-                    name VARCHAR(512) NOT NULL,
+                    name VARCHAR(512),
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
                 );           
@@ -22,7 +22,8 @@ async function run() {
                     id SERIAL PRIMARY KEY NOT NULL,
                     brewery_id INTEGER NOT NULL,
                     name VARCHAR(512) NOT NULL,
-                    visited BOOLEAN NOT NULL,
+                    visited VARCHAR(512),
+                    favorited BOOLEAN NOT NULL,
                     user_id INTEGER NOT NULL REFERENCES users(id)
             );
         `);
