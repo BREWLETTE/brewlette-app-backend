@@ -1,6 +1,7 @@
+const bcrypt = require('bcryptjs');
 const client = require('../lib/client');
 // import our seed data:
-const animals = require('./animals.js');
+const breweries = require('./breweries.js');
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
 
@@ -13,24 +14,25 @@ async function run() {
 
     const users = await Promise.all(
       usersData.map(user => {
+        const hash = bcrypt.hashSync(user.password, 8);
         return client.query(`
-                      INSERT INTO users (email, hash)
-                      VALUES ($1, $2)
+                      INSERT INTO users (name, email, hash)
+                      VALUES ($1, $2, $3)
                       RETURNING *;
                   `,
-        [user.email, user.hash]);
+        [user.name, user.email, hash]);
       })
     );
       
     const user = users[0].rows[0];
 
     await Promise.all(
-      animals.map(animal => {
+      breweries.map(brew => {
         return client.query(`
-                    INSERT INTO animals (name, cool_factor, owner_id)
-                    VALUES ($1, $2, $3);
+                    INSERT INTO breweries (brewery_id, name, visited, favorited, user_id)
+                    VALUES ($1, $2, $3, $4, $5);
                 `,
-        [animal.name, animal.cool_factor, user.id]);
+        [brew.brewery_id, brew.name, brew.visited, brew.favorited, user.id]);
       })
     );
     
