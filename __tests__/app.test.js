@@ -93,5 +93,26 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expectation);
     });
+
+    test('POST /breweries creates a new brewery', async() => {
+      const expectation = 
+        {
+          brewery_id: 1124,
+          name: 'Triana Loves Beer',
+          visited: '2022-01-24T00:00:00.000-08:00',
+          favorited: false,
+          user_id: 1
+        };
+      const data = await fakeRequest(app)
+        .post('/api/breweries')
+        .send(expectation)
+        .set('Authorization', token)
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body.brewery_id).toEqual(expectation.brewery_id);
+      expect(data.body.id).toBeGreaterThan(0);
+    });
+
   });
 });
