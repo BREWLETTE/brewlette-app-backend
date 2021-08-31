@@ -29,10 +29,10 @@ async function run() {
     await Promise.all(
       breweries.map(brew => {
         return client.query(`
-                    INSERT INTO breweries (brewery_id, name, visited, user_id)
-                    VALUES ($1, $2, $3, $4);
+                    INSERT INTO breweries (brewery_id, name, visited, favorited, user_id)
+                    VALUES ($1, $2, $3, $4, $5);
                 `,
-        [brew.brewery_id, brew.name, brew.visited, user.id]);
+        [brew.brewery_id, brew.name, brew.visited, brew.favorited, user.id]);
       })
     );
     
