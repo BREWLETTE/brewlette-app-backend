@@ -29,7 +29,7 @@ describe('app routes', () => {
       return client.end(done);
     });
 
-    test('GET /returns all breweries in dummy data', async() => {
+    test('GET /breweries returns all breweries in dummy data', async() => {
       const expectation = [
         {
           brewery_id: 200,
@@ -74,6 +74,24 @@ describe('app routes', () => {
         .expect(200);
 
       expect(data.body.length).toEqual(expectation.length);
+    });
+
+    test('GET /breweries/:id returns an brewery by id', async() => {
+      const expectation = 
+        {
+          brewery_id: 200,
+          name: 'Breckenridge BBQ and Brew Pub',
+          visited: '2022-01-24T00:00:00.000-08:00',
+          favorited: false,
+          user_id: 1
+        };
+      const data = await fakeRequest(app)
+        .get('/api/breweries/1')
+        .set('Authorization', token)
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
     });
   });
 });
