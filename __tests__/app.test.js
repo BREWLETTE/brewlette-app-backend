@@ -133,28 +133,28 @@ describe('app routes', () => {
       expect(data.body.brewery_id).toEqual(expectation.brewery_id);
       expect(data.body.id).toBeGreaterThan(0);
     });
-    // test('DELETE /breweries/:id deletes a brewery--selected by id', async() => {
-    //   const deletedBrewery = 
-    //     {
-    //       id: 6, 
-    //       brewery_id: 1124,
-    //       name: 'Triana Loves Beer',
-    //       visited: '2022-01-24T00:00:00.000-08:00',
-    //       favorited: true,
-    //       user_id: 1
-    //     };
-    //   await fakeRequest(app)
-    //     .post('/api/breweries')
-    //     .send(deletedBrewery)
-    //     .set('Authorization', token)
-    //     .expect('Content-Type', /json/);
-    //   const data = await fakeRequest(app)
-    //     .delete('/api/breweries/6')
-    //     .set('Authorization', token)
-    //     .expect(200)
-    //     .expect('Content-Type', /json/);
-    //   expect(data.body).toEqual(...deletedBrewery, id: 6 );
-    // });
+    test('DELETE /breweries/:id deletes a brewery--selected by id', async() => {
+      const deletedBrewery = 
+        {
+          id: 6, 
+          brewery_id: 1124,
+          name: 'Triana Loves Beer',
+          visited: '2022-01-24T00:00:00.000-08:00',
+          favorited: true,
+          user_id: 2
+        };
+      await fakeRequest(app)
+        .post('/api/breweries')
+        .send(deletedBrewery)
+        .set('Authorization', token)
+        .expect('Content-Type', /json/);
+      const data = await fakeRequest(app)
+        .delete('/api/breweries/6')
+        .set('Authorization', token)
+        .expect(200)
+        .expect('Content-Type', /json/);
+      expect(data.body).toEqual(deletedBrewery);
+    });
 
 
 
