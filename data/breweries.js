@@ -2,7 +2,7 @@ module.exports = [
   {
     brewery_id: 200,
     name: 'Breckenridge BBQ and Brew Pub',
-    visited: new Date(2021, 12, 24),
+    visited: '2022-01-24T00:00:00.000-08:00',
     favorited: false,
     user_id: 1
   },
