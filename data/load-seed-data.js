@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const client = require('../lib/client');
-// import our seed data:
 const breweries = require('./breweries.js');
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
