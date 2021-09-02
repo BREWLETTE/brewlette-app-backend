@@ -133,6 +133,7 @@ describe('app routes', () => {
       expect(data.body.brewery_id).toEqual(expectation.brewery_id);
       expect(data.body.id).toBeGreaterThan(0);
     });
+
     test('DELETE /breweries/:id deletes a brewery--selected by id', async() => {
       const deletedBrewery = 
         {
@@ -153,10 +154,8 @@ describe('app routes', () => {
         .set('Authorization', token)
         .expect(200)
         .expect('Content-Type', /json/);
+        
       expect(data.body).toEqual(deletedBrewery);
     });
-
-
-
   });
 });
